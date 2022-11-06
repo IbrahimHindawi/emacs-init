@@ -1,5 +1,5 @@
 ;; Init default settings
-(load-theme 'modus-vivendi)
+(load-theme 'x19)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -77,11 +77,6 @@
   :config
   (setq ivy-initial-inputs-alist nil))
 
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom (doom-modeline-height 15))
-
 (use-package company
   :config
   (setq company-minimum-prefix-length 1
@@ -98,13 +93,6 @@
 (require 'which-key)
 (which-key-mode)
 
-;; (use-package lsp-mode
-  ;; :commands (lsp-mode-deferred)
-  ;; :init
-  ;; (setq lsp-keymap-prefix "C-c l")
-  ;; :config
-  ;; (lsp-enable-which-key-integration t))
-
 (use-package eglot)
 (require 'eglot)
 (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
@@ -117,20 +105,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company which-key evil doom-modeline counsel ivy command-log-mode use-package)))
+ '(custom-safe-themes
+   '("e2098646bb366bb63fa7026c4f9a0c777f103619679988e22e20bcd22890ca2c" default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "burlywood2" :background "gray10"))))
- '(cursor ((t (:background "dark violet"))))
- '(font-lock-builtin-face ((t (:foreground "orange"))))
- '(font-lock-constant-face ((t (:foreground "orange"))))
- '(font-lock-function-name-face ((t (:foreground "orange"))))
- '(font-lock-keyword-face ((t (:foreground "orange" :weight normal))))
- '(font-lock-preprocessor-face ((t (:inherit normal :foreground "burlywood1"))))
- '(font-lock-string-face ((t (:foreground "DarkOrange1"))))
- '(font-lock-type-face ((t (:foreground "orange" :weight normal))))
- '(font-lock-variable-name-face ((t (:foreground "burlywood1")))))
+ )
