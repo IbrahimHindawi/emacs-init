@@ -19,6 +19,6 @@
  '(font-lock-variable-name-face ((t (:foreground "burlywood1"))))
  '(font-lock-comment-face ((t (:foreground "gray60"))))
  '(highlight ((t (:background "#000033"))))
- '(link ((t (:foreground "yellow" :underline t))))
+ '(link ((t (:foreground "hot pink" :underline t))))
  '(mode-line ((t (:background "gray30" :foreground "gray80" :box (:line-width (1 . 1) :color "#a8a8a8") :overline nil :underline nil)))))
 (provide-theme 'x19)

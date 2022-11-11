@@ -1,5 +1,6 @@
 ;; Init default settings
-(load-theme 'x19)
+(load-theme 'x19 t)
+;;(load-theme 'firebelly-theme t)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -33,6 +34,11 @@
 ;; (Global-Set-Key (Kbd "C-M-J") 'move-beginning-of-line)
 ;; (global-set-key (kbd "C-M-S-l") 'move-end-of-line)
 ;; (global-set-key (kbd "C-M-S-j") 'move-beginning-of-line)
+
+(defun set-bidi-env ()
+  "interactive"
+  (setq bidi-paragraph-direction 'nil))
+(add-hook 'org-mode-hook 'set-bidi-env)
 
 ;; Init package sources
 (require 'package)
@@ -81,7 +87,7 @@
   :config
   (setq company-minimum-prefix-length 1
 	company-idle-delay 0.0
-	global-company-mode 1)) ; default is 2.0
+	global-company-mode 1))
 (require 'company)
 
 (unless (package-installed-p 'evil)
@@ -105,11 +111,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("e2098646bb366bb63fa7026c4f9a0c777f103619679988e22e20bcd22890ca2c" default)))
+ '(package-selected-packages
+   '(firebally-theme company which-key command-log-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
