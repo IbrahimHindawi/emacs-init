@@ -11,15 +11,18 @@
 (windmove-default-keybindings)
 (global-hl-line-mode 1)
 (set-face-foreground 'highlight nil)
-
 ;; (customize-option global-superword-mode)
 ;; (customize-option global-subword-mode)
 
+(setq-default indent-tabs-mode nil)
+(setq-default tabs-width 4)
+(setq indent-line-function 'insert-tab)
+
 ;; Customize key bindings
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-S-d") 'c-electric-delete)
-(global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "C-M-d") 'c-electric-backspace)
+;; (global-set-key (kbd "C-S-d") 'c-electric-delete)
+;; (global-set-key (kbd "M-o") 'other-window)
+;; (global-set-key (kbd "C-M-d") 'c-electric-backspace)
 ;; (global-set-key (kbd "C-l") 'forward-char)
 ;; (global-set-key (kbd "C-j") 'backward-char)
 ;; (global-set-key (kbd "M-l") 'forward-to-word)
@@ -89,11 +92,49 @@
 	company-idle-delay 0.0
 	global-company-mode 1))
 (require 'company)
+(company-mode 0)
+
+;;;; Code Completion
+(use-package corfu
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                 ; Allows cycling through candidates
+  (corfu-auto t)                  ; Enable auto completion
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.0)
+  (corfu-popupinfo-delay '(0.5 . 0.2))
+  (corfu-preview-current 'insert) ; Do not preview current candidate
+  (corfu-preselect-first nil)
+  (corfu-on-exact-match nil)      ; Don't auto expand tempel snippets
+
+  ;; Optionally use TAB for cycling, default is `corfu-complete'.
+  ;;:bind (:map corfu-map
+              ;;("M-SPC"      . corfu-insert-separator)
+              ;;("TAB"        . corfu-next)
+              ;;([tab]        . corfu-next)
+              ;;("S-TAB"      . corfu-previous)
+              ;;([backtab]    . corfu-previous)
+              ;;("S-<return>" . corfu-insert)
+              ;;("RET"        . nil))
+
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  (corfu-popupinfo-mode) ; Popup completion info
+  :config
+  (add-hook 'eshell-mode-hook
+            (lambda () (setq-local corfu-quit-at-boundary t
+                              corfu-quit-no-match t
+                              corfu-auto nil)
+              (corfu-mode))))
 
 (unless (package-installed-p 'evil)
   (package-install 'evil))
 (require 'evil)
-(evil-mode 0)
+(evil-mode 1)
+
+;;(use-package masm-mode)
+;;(require 'masm-mode)
 
 (use-package which-key)
 (require 'which-key)
@@ -105,6 +146,10 @@
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 
+(use-package org-bullets)
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
 ;; Custom vars
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -112,7 +157,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(firebally-theme company which-key command-log-mode use-package)))
+        '(corfu masm-mode simple-httpd org-bullets firebally-theme company which-key command-log-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
