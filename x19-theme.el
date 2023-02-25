@@ -1,5 +1,5 @@
 (deftheme x19
-  "x19's Theme") ;; this is a theme
+  "x19's Theme")
 
 (custom-theme-set-variables
  'x19
@@ -8,14 +8,14 @@
 (custom-theme-set-faces
  'x19
  '(default ((t (:background "gray10" :foreground "burlywood2"))))
- '(cursor ((t (:background "dark violet"))))
- '(font-lock-builtin-face ((t (:foreground "orange"))))
- '(font-lock-constant-face ((t (:foreground "orange"))))
- '(font-lock-function-name-face ((t (:foreground "orange"))))
- '(font-lock-keyword-face ((t (:foreground "orange" :weight normal))))
+ '(cursor ((t (:background "red"))))
+ '(font-lock-builtin-face ((t (:foreground "dark violet"))))
+ '(font-lock-constant-face ((t (:foreground "dark violet"))))
+ '(font-lock-function-name-face ((t (:foreground "dark violet"))))
+ '(font-lock-keyword-face ((t (:foreground "dark violet" :weight normal))))
  '(font-lock-preprocessor-face ((t (:inherit normal :foreground "burlywood1"))))
  '(font-lock-string-face ((t (:foreground "DarkOrange1"))))
- '(font-lock-type-face ((t (:foreground "orange" :weight normal))))
+ '(font-lock-type-face ((t (:foreground "dark violet" :weight normal))))
  '(font-lock-variable-name-face ((t (:foreground "burlywood1"))))
  '(font-lock-comment-face ((t (:foreground "gray60"))))
  '(highlight ((t (:background "#000033"))))

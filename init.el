@@ -7,7 +7,7 @@
 (menu-bar-mode -1)
 (set-fringe-mode 10)
 (set-default 'truncate-lines t)
-(set-face-attribute 'default nil :font "Consolas" :height 128)
+(set-face-attribute 'default nil :font "Consolas" :height 92)
 (windmove-default-keybindings)
 (global-hl-line-mode 1)
 (set-face-foreground 'highlight nil)
@@ -19,6 +19,13 @@
 (setq indent-line-function 'insert-tab)
 
 ;; Customize key bindings
+(global-set-key (kbd "<f5>") 'recompile)
+(defun my-project-runner ()
+  (interactive)
+  (let ((default-directory (project-root (project-current t))))
+    (shell-command "brun.bat")))
+(global-set-key (kbd "<f6>") #'my-project-runner2)
+;; (GLOBAL-set-key (kbd "<f6>") 'shell brun.bat)
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 ;; (global-set-key (kbd "C-S-d") 'c-electric-delete)
 ;; (global-set-key (kbd "M-o") 'other-window)
@@ -133,7 +140,9 @@
 (require 'evil)
 (evil-mode 1)
 
-;;(use-package masm-mode)
+(modify-syntax-entry ?_ "w" (standard-syntax-table))
+(modify-syntax-entry ?_ "w" (c-mode))
+
 ;;(require 'masm-mode)
 
 (use-package which-key)
@@ -150,14 +159,27 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
+(use-package cff)
+(require 'cff)
+;; defines shortcut for find source/header file for the current
+;; file
+(add-hook 'c++-mode-hook
+           '(lambda ()
+              (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
+(add-hook 'c-mode-hook
+           '(lambda ()
+              (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
+
 ;; Custom vars
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("45830f6a1aacf065bee5853f619522773ba635a3f0d52938dbcd967d65496605" "e694a96f516b37b6876581eec2a13cc542d3bf70639acd72161fb45583a66494" default))
  '(package-selected-packages
-        '(corfu masm-mode simple-httpd org-bullets firebally-theme company which-key command-log-mode use-package)))
+   '(inkpot-theme cff corfu masm-mode simple-httpd org-bullets firebally-theme company which-key command-log-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
