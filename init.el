@@ -8,11 +8,35 @@
 (set-fringe-mode 10)
 (set-default 'truncate-lines t)
 (set-face-attribute 'default nil :font "Consolas" :height 92)
+;; (set-fontset-font t 'arabic "Noto Naskh Arabic")
 (windmove-default-keybindings)
 (global-hl-line-mode 1)
 (set-face-foreground 'highlight nil)
 ;; (customize-option global-superword-mode)
 ;; (customize-option global-subword-mode)
+
+;; arabic movement fix
+;; (define-key evil-normal-state-map "h" 'left-char)
+;; (define-key evil-normal-state-map "l" 'right-char)
+;; (define-key evil-normal-state-map [left] 'left-char)
+;; (define-key evil-normal-state-map [right] 'right-char)
+;; (define-key evil-visual-state-map "h" 'left-char)
+;; (define-key evil-visual-state-map "l" 'right-char)
+;; (define-key evil-visual-state-map [left] 'left-char)
+;; (define-key evil-visual-state-map [right] 'right-char)
+(setq visual-order-cursor-movement t)
+
+;; some saving stuff
+(setq
+backup-by-copying t ; don't clobber symlinks
+backup-directory-alist
+'(("." . "~/.saves")) ; don't litter my fs tree
+delete-old-versions t
+kept-new-versions 6
+kept-old-versions 2
+version-control t)
+
+(setq visual-order-cursor-movement t)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tabs-width 4)
@@ -24,7 +48,8 @@
   (interactive)
   (let ((default-directory (project-root (project-current t))))
     (shell-command "brun.bat")))
-(global-set-key (kbd "<f6>") #'my-project-runner2)
+(global-set-key (kbd "<f6>") #'my-project-runner)
+
 ;; (GLOBAL-set-key (kbd "<f6>") 'shell brun.bat)
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 ;; (global-set-key (kbd "C-S-d") 'c-electric-delete)
